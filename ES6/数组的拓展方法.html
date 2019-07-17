@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /*
+   需求:
+   1. 输出第一个6的下标
+   2. 输出最后一个6的下标
+   3. 输出所有元素的值和下标
+   4. 根据arr产生一个新数组,要求每个元素都比原来大10
+   5. 根据arr产生一个新数组, 返回的每个元素要大于4
+   6. 输出arr所有元素累加的结果
+*/
+  var arr = [1, 6, 8, 2, 1, 4, 6, 7, 3];
+  <!--1. 输出第一个6的下标-->
+  console.log(arr.indexOf(6));
+  <!--2. 输出最后一个6的下标-->
+  console.log(arr.lastIndexOf(6));
+  <!--3. 输出所有元素的值和下标-->
+  arr.forEach(function (item,index) {
+    console.log(item,index);
+  });
+  <!--4. 根据arr产生一个新数组,要求每个元素都比原来大10-->
+  var newArr = arr.map(function (item,index) {
+    return item+10;
+  });
+  console.log(newArr);
+  <!--5. 根据arr产生一个新数组, 返回的每个元素要大于4-->
+  var newArr1 = arr.filter(function(item,index){
+    return item>4;
+  });
+  console.log(newArr1);
+  <!--6. 输出arr所有元素累加的结果  previousValue:上一个遍历的值，默认为0， currentValue：当前遍历的值；每一次遍历之后都将上一次的和赋值给previousValue -->
+  var newArr2 = arr.reduce(function (previousValue, currentValue, currentIndex, array) {
+    return previousValue+currentValue;
+  });
+  console.log(newArr2);
+</script>
+</body>
+</html>

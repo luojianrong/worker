@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  class People{
+    constructor(name,age){
+      this.name = name ;
+      this.age = age;
+    }
+    eat(){
+      console.log(`${this.name}`+"在吃饭");
+    }
+  }
+
+  class Students extends People{
+    constructor(name,age,number){
+      super(name,age);
+      this.number = number;
+    }
+
+    study(){
+      console.log(`${this.name}`+"正在学习");
+    }
+  }
+
+  var Lyli = new Students("Lyli",18,"001");
+  console.log(Lyli);
+  Lyli.study();
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+/*
+  var promise = new Promise((s,y)=>{
+    let data = {name:"liLy"};
+    y("出错了");
+    // resolve(data);
+  })
+
+  /!*promise
+    .then((data)=>{
+    console.log(data);
+  })
+    .catch((err)=>{
+      console.log(err);
+    })*!/
+
+  promise.then(
+    (data)=>{
+      console.log(data);
+    },
+    (err)=>{
+      console.log(err);
+    })
+*/
+
+  /*使用promise，等一个异步操作做完成后再执行其他工作，并将异步操作的返回值传过去*/
+/*
+  const promise = new Promise((resolve,reject)=>{
+    setInterval(()=>{
+      const result = [1,2,2,3];
+      resolve(result);
+    },1000);
+    console.log("111");
+  });
+
+  promise
+    .then((result)=>{
+      console.log("执行成功了"+result);
+    })
+    .catch((err)=>{
+
+    });*/
+
+  /*使用promise：有两个异步操作。等第一个异步操作执行完，再执行第二个异步操作*/
+  /*const promise = new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+      console.log("开始执行第一个异步代码");
+      reject();
+    },1000)
+  });
+
+  promise
+    .then(()=>{
+      console.log("第一个异步代码执行成功了");
+     return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+          console.log("第二个异步代码开始了");
+          resolve();
+        },2000)
+
+      });
+    })
+    .then(()=>{
+      console.log("第二个异步代码执行成功了了");
+    })
+    .catch(()=>{
+      console.log("执行失败了");
+    })*/
+
+/*
+ 使用promise：有三个异步操作。同时执行三个异步操作，
+   等三个异步操作都执行成功了~就成功,
+   有一个失败了，就失败
+*/
+
+const promise = new Promise((resolve,reject)=>{
+  var num = 0;
+  var arr = [];
+  setTimeout(()=>{
+    num++;
+    const first = 1;
+    arr[0] = first;
+    if (num===3){
+      resolve(arr);
+    }
+    console.log("111");
+  },3000)
+
+  setTimeout(()=>{
+    num++;
+    const second = 2;
+    arr[1] = second;
+    if (num===3){
+      resolve(arr);
+    }
+    console.log("222");
+  },1000)
+
+  setTimeout(()=>{
+    const three = 3;
+    arr[2] = three;
+    num++;
+    if (num===3){
+      resolve(arr);
+    }
+    console.log("333");
+  },2000)
+
+})
+
+
+  promise
+    .then((arr)=>{
+      console.log("执行成功了"+arr);
+    })
+
+
+
+</script>
+
+</body>
+</html>

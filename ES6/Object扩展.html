@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+
+  /*Object.create(obj：继承的对象,{自定义新的属性})==》实现对象的继承
+  *   writable:true,  ==》设置属性是否可以重新修改
+      enumerable:true,  ==》设置属性是否可以枚举
+      configurable:true ==》设置属性是否可以重新配置，前面两个属性，以及是否可以删除 */
+  var obj = {name:"liLy",age:16};
+
+  var newObj = Object.create(obj,{
+    sex:{
+      value:"女",
+      writable:false,
+      enumerable:true,
+      configurable:true
+    }
+  });
+
+  newObj.sex = "男";
+
+  delete newObj.sex;
+  console.log(newObj);
+
+  Object.defineProperty();
+  Object.defineProperties();
+</script>
+
+</body>
+</html>

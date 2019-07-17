@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  function Person(name,sex) {
+    this.name = name;
+    this.sex = sex;
+  }
+  Person.prototype.setName = function () {
+    console.log("设置名字");
+  }
+
+  function student(name,sex,age) {
+
+  }
+
+  var stu = new Person();
+  console.log(stu);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>面试题_综合</title>
+</head>
+<body>
+<script type="text/javascript">
+  debugger;
+  function Foo() {
+    getName = function () { console.log (1); };
+    return this;
+  }
+  Foo.getName = function () { console.log (2);};
+  Foo.prototype.getName = function () { console.log (3);};
+  var getName = function () { console.log (4);};
+  function getName() { console.log (5);}
+
+  /*变量和函数声明提升后为：
+  *
+  var getName；
+  function getName() { alert (5);}  // 函数整体提升，getName会被后面的覆盖，因此不会再出现5
+
+  （1）function Foo() {
+    getName = function () { alert (1); };
+    return this;
+  }
+  （2）Foo.getName = function () { alert (2);};
+  （3）Foo.prototype.getName = function () { alert (3);};
+  （4）getName = function () { alert (4);};
+  */
+
+  //请写出以下输出结果：
+  Foo.getName();  //2          Foo.getName(),执行Foo的属性，也就是（2）
+  getName();  //4              执行了（4）
+  Foo().getName();  //1        Foo()，通过调用Foo()，执行里面的getName()，也就是（1），此时getName()的结果被修改为1.
+  getName();  //1              上一步执行已经修改了getName()的结果，因此为1
+  new Foo.getName();  //2      实例化Foo.getName()，结果为2
+  new Foo().getName();  //3    实例化Foo()，通过实例查找getName(),自身没有，沿着原型链往上找，找到了，执行了 （3），结果为3
+  new new Foo().getName();//3  实例化Foo()，再一次实例化，执行了 （3），结果为3
+</script>
+</body>
+</html>
