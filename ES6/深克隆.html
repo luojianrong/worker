@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+ /* //检测类型
+  function checkType(target) {
+    return Object.prototype.toString.call(target).slice(8,-1);
+  }
+  /!*深度克隆数据*!/
+  function deepClone(target){
+    let result = null;
+    const type = checkType(target);
+    if (type === 'Array') {
+      result = [];
+    }else if(type === 'Obje
+      return target;
+    }
+
+    for (const key in target){
+      result[key] = deepClone[target[key]]
+    }
+    return result;
+
+  } */
+
+ /*检测数据了类型*/
+  function checkType(target) {
+    return Object.prototype.toString.call(target).slice(8,-1);
+  }
+
+  /*深度克隆*/
+  function deepClone(target) {
+    let result = null;
+    let type = checkType(target);
+
+    if (type === "Object"){
+      result = {};
+    }else if (type === "Array"){
+      result = [];
+    } else{
+      return result;
+    }
+
+    for (const key in target){
+      result[key] = deepClone(target[key]);
+     }
+    return  result;
+
+  }
+
+  const obj = {name:"ly"};
+  const newObj = deepClone(obj);
+
+  newObj.name = "bob";
+  console.log(obj,newObj);
+</script>
+</body>
+</html>

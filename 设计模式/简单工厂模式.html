@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  'use strict'
+  class User {
+    constructor(opt){
+      this.viewPage  = opt.viewPage;
+      this.name = opt.name;
+    }
+
+    static getInstance(opt){
+      switch (opt) {
+        case "superAdmin":
+          return new User({name:"超级管理员",viewPage:["首页","通讯录"]});
+          break;
+        case "admin":
+          return new User({name:"普通管理员",viewPage:["首页"]});
+          break;
+        default:
+          throw new Error("参数错误")
+      }
+    }
+  }
+
+  let superAdmin = User.getInstance("superAdmin");
+  console.log(superAdmin);
+
+  let admin = User.getInstance("admin");
+  console.log(admin);
+
+
+  var obj = {
+    f() {
+      console.log(this)
+    }
+  };
+
+  obj.f();
+
+
+</script>
+
+</body>
+</html>

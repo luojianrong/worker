@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  function* generator(){
+    console.log("函数开始执行了");
+    const result1 =yield 789;
+
+    console.log("函数执行中");
+    console.log(result1); //456
+    const result2 =yield 345;
+
+    console.log("函数执行中");
+    console.log(result2); //vvv
+
+  }
+
+ const interator = generator();//不会执行函数，只是返回了一个对象
+  console.log(interator);   //generator {<suspended>}
+
+  interator.next();  //开始执行generator函数，遇到yield则暂停
+
+  const result =interator.next(456);
+  console.log(result); //{value: 345, done: false}
+
+  const result1 = interator.next("vvv");
+  console.log(result1); //{value: undefined, done: true}
+
+
+  /*给对象部署iterator接口*/
+  const obj = {name:"ly",age:13};
+
+  Object.prototype[Symbol.iterator] = function *() {
+    for (const value in this){
+      yield this[value];
+    }
+  }
+
+  for (const key in obj){
+    console.log(key)
+  }
+</script>
+</body>
+</html>

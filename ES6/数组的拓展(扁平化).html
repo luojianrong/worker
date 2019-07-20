@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  let arr =[1,[2],[[[4]]]];
+  console.log(arr.flat(Infinity));
+
+
+ /* 纯递归实现
+  算法的步骤是这样的：
+
+顺序扫描初始数组{arr}的第一维，取元素element，若element还是数组则执行3，若element是单个元素则执行2
+  将单元素加入newArr的一维数组中
+  把{element}数组作为新的初始数组，执行1
+
+  转化为JS代码，可以这样写：*/
+
+function fn(arr,newArr){
+  arr.forEach(element => {
+    if(!Array.isArray(element)){
+      newArr.push(element);
+    }else{
+      //return arguments.callee(element,newArr);
+      return fn(arr,newArr);
+    }
+  });
+  return newArr;
+}
+
+  //降维打击 ： 利用了toString方法的特性,或者是join方法也可以
+  /*数组被toString方法降维后的字符串使用split方法还原为一维数组。
+  但是这里需要处理一个问题，就是如果数组中的元素是数字而不是字符或字符串，
+  那么split切割还原后的字符或字符串需要转换为数字。这里我使用||运算符做了一个巧妙的适配。*/
+  function reduceDimen(arr){
+    return arr.toString().split(',').map(function(val){
+      return parseInt(val) || parseFloat(val) || val;
+    });
+  }
+
+
+  //扩展运算符 和 递归 结合使用
+  /*判断初始数组{arr}是否至少是二维数组，也就是说arr数组中是否包含数组项，若包含则执行2，若不包含则执行3
+    使用扩展运算符对数组扁平化，并将扁平化后数组{arr}置为初始数组，然后以此为参数执行1
+     已经扁平化为一维数组了，直接返回结果*/
+  function extendOpt(arr){
+    if(!arr.some(element => {
+      return Array.isArray(element);
+    })){
+      return arr;
+    }else{
+      arr = [].concat(...arr);
+      return arguments.callee(arr);
+    }
+  }
+
+
+  const arr1 = [ 1,[2],[[[4]]] ];
+
+  extendOpt(arr1);
+
+  console.log(reduceDimen(arr1));
+
+  let newArr=[];
+  console.log(fn(arr1, newArr));
+
+  let newArr1=[];
+  console.log(fn2(arr1, newArr1));
+
+</script>
+
+
+
+</body>
+</html>
